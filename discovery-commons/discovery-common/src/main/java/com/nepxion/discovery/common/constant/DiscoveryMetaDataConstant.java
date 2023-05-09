@@ -26,4 +26,6 @@ public class DiscoveryMetaDataConstant {
     public static final String SPRING_APPLICATION_PROTOCOL = "spring_application_protocol";
 
     public static final String SEPARATE = "_";
+
+    public static final String APP_VERSION = "app.version";
 }

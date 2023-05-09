@@ -10,6 +10,7 @@ package com.nepxion.discovery.plugin.registercenter.nacos.context;
  */
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -92,6 +93,13 @@ public class NacosApplicationContextInitializer extends PluginApplicationContext
             }
             metadata.put(DiscoveryMetaDataConstant.SPRING_APPLICATION_GROUP_KEY, groupKey);
             metadata.put(DiscoveryMetaDataConstant.SPRING_APPLICATION_CONTEXT_PATH, PluginContextAware.getContextPath(environment));
+
+            Optional.ofNullable(applicationContext.getEnvironment().getProperty(DiscoveryMetaDataConstant.APP_VERSION)).ifPresent(version -> {
+                metadata.put(DiscoveryConstant.N_D_VERSION, version);
+            });
+            Optional.ofNullable(applicationContext.getEnvironment().getProperty(DiscoveryMetaDataConstant.APP_VERSION)).ifPresent(version -> {
+                metadata.put(DiscoveryConstant.VERSION, version);
+            });
 
             try {
                 ApplicationInfoAdapter applicationInfoAdapter = applicationContext.getBean(ApplicationInfoAdapter.class);
